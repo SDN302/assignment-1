@@ -6,3 +6,21 @@
 ![GitHub License](https://img.shields.io/github/license/SDN302/assignment-1)
 
 > Node Modules, Express, MongoDB and REST API
+
+## Documents
+
+- Document: [Assignment 1](docs/Assignment%201.docx)
+
+## Build
+
+### Install dependencies:
+
+```bash
+yarn
+```
+
+### Run:
+
+```bash
+yarn dev
+```
