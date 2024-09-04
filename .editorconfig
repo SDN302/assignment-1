@@ -1,0 +1,7 @@
+[*.{ts,json,prettierrc}]
+indent_style = tab
+indent_size = 2
+
+[*.md]
+indent_style = tab
+indent_size = 2
