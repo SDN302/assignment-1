@@ -1,0 +1,20 @@
+import dotnev from 'dotenv';
+
+dotnev.config();
+
+export const DEVELOPMENT: boolean = process.env['APP_ENV'] == 'development';
+
+export const SERVER_HOST: string = process.env['SERVER_HOST'] || 'localhost';
+export const SERVER_PORT: number = parseInt(
+	process.env['SERVER_PORT'] || '3000',
+);
+
+export const SERVER_ORIGIN: string = DEVELOPMENT
+	? '*'
+	: (process.env['ORIGIN'] as string);
+
+export const server = {
+	host: SERVER_HOST,
+	port: SERVER_PORT,
+	origin: SERVER_ORIGIN,
+};
