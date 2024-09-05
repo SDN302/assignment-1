@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { Question } from './question';
+import { Question } from './question.model';
 
 const QuizSchema = new mongoose.Schema({
 	id: { type: Schema.Types.ObjectId, required: true },
