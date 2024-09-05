@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 const QuestionSchema = new mongoose.Schema({
-	_id: { type: Schema.Types.ObjectId, required: true },
 	text: { type: Schema.Types.String, required: true },
 	options: { type: Schema.Types.Array, required: true },
 	correctAnswerIndex: { type: Schema.Types.Number, required: true },
