@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { server } from './config/config';
+import connectDb from './config/db';
 
 // CORS Middleware
 const corsOptions = {
@@ -19,6 +20,9 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.listen(server.port, () => {
-	console.log(`Listening on PORT ${server.port}`);
+app.listen(server.port, async () => {
+	// Connect to MongoDB
+	await connectDb();
+
+	console.info(`Listening on PORT ${server.port}`);
 });
