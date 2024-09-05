@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { server } from './config/config';
 import connectDb from './config/db';
+import question from './routes/question.router';
 
 // CORS Middleware
 const corsOptions = {
@@ -16,9 +17,12 @@ const corsOptions = {
 // Express App
 const app = express();
 
-// Middleware
+// Middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Routes
+app.use('/questions', question);
 
 app.listen(server.port, async () => {
 	// Connect to MongoDB
