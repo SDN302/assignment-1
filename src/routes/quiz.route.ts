@@ -19,6 +19,8 @@ const router = express.Router();
  *         type: string
  *       title:
  *         type: string
+ *       description:
+ *         type: string
  *       questions:
  *         type: array
  *         items:
@@ -32,6 +34,8 @@ const router = express.Router();
  *     type: object
  *     properties:
  *       title:
+ *         type: string
+ *       description:
  *         type: string
  *       questions:
  *         type: array
@@ -47,10 +51,43 @@ const router = express.Router();
  *     properties:
  *       title:
  *         type: string
+ *       description:
+ *         type: string
  *       questions:
  *         type: array
  *         items:
  *           type: string
+ */
+
+/**
+ * @swagger
+ * definitions:
+ *   CapitalQuestion:
+ *     type: object
+ *     properties:
+ *       _id:
+ *         type: string
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       questions:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             _id:
+ *               type: string
+ *             title:
+ *               type: string
+ *             description:
+ *               type: string
+ *             keywords:
+ *               type: array
+ *               items:
+ *                 type: string
+ *             correctAnswerIndex:
+ *               type: number
  */
 
 /**
@@ -77,7 +114,7 @@ const router = express.Router();
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.get('/', getAllQuizzes);
@@ -104,6 +141,15 @@ router.get('/', getAllQuizzes);
  *           application/json:
  *             schema:
  *               $ref: '#/definitions/Quiz'
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:
@@ -111,7 +157,7 @@ router.get('/', getAllQuizzes);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.get('/:quizId', getQuizById);
@@ -145,7 +191,7 @@ router.get('/:quizId', getQuizById);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.post('/', createQuiz);
@@ -179,6 +225,15 @@ router.post('/', createQuiz);
  *           application/json:
  *             schema:
  *               $ref: '#/definitions/Quiz'
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:
@@ -186,7 +241,7 @@ router.post('/', createQuiz);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.put('/:quizId', updateQuiz);
@@ -219,6 +274,6 @@ router.put('/:quizId', updateQuiz);
  *                 message:
  *                   type: string
  */
-router.delete('/:quizId', deleteQuiz);
+router.get('/:quizId/populate', getCapitalQuestions);
 
 export default router;

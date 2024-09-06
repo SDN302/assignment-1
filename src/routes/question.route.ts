@@ -95,7 +95,7 @@ const router = express.Router();
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.get('/', getAllQuestions);
@@ -122,6 +122,15 @@ router.get('/', getAllQuestions);
  *           application/json:
  *             schema:
  *               $ref: '#/definitions/Question'
+ *       404:
+ *         description: Question not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:
@@ -129,7 +138,7 @@ router.get('/', getAllQuestions);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.get('/:questionId', getQuestionById);
@@ -163,7 +172,7 @@ router.get('/:questionId', getQuestionById);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.post('/', createQuestion);
@@ -197,6 +206,15 @@ router.post('/', createQuestion);
  *           application/json:
  *             schema:
  *               $ref: '#/definitions/Question'
+ *       404:
+ *         description: Question not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:
@@ -204,7 +222,7 @@ router.post('/', createQuestion);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.put('/:questionId', updateQuestion);
@@ -227,6 +245,15 @@ router.put('/:questionId', updateQuestion);
  *     responses:
  *       200:
  *         description: Update a question successfully
+ *       404:
+ *         description: Question not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:
@@ -234,7 +261,7 @@ router.put('/:questionId', updateQuestion);
  *             schema:
  *               type: object
  *               properties:
- *                 message:
+ *                 error:
  *                   type: string
  */
 router.delete('/:questionId', deleteQuestion);

@@ -21,6 +21,10 @@ export const getQuestionById = async (req: Request, res: Response) => {
 
 		const question = await Question.findById(questionId);
 
+		if (!question) {
+			return res.status(404).json({ message: 'Question not found' });
+		}
+
 		return res.status(200).json(question);
 	} catch (error: any) {
 		return res.status(500).json({ error: error.message });
