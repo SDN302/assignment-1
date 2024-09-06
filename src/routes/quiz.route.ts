@@ -3,6 +3,7 @@ import {
 	createQuiz,
 	deleteQuiz,
 	getAllQuizzes,
+	getCapitalQuestions,
 	getQuizById,
 	updateQuiz,
 } from '../controllers/quiz.controller';
@@ -264,6 +265,58 @@ router.put('/:quizId', updateQuiz);
  *     responses:
  *       200:
  *         description: Delete a quiz successfully
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+router.delete('/:quizId', deleteQuiz);
+
+/**
+ * @swagger
+ * /quizzes/{quizId}/populate:
+ *   get:
+ *     summary: Populate a quiz with capital questions
+ *     description: Populate a quiz with capital questions
+ *     tags:
+ *       - Quizzes
+ *     parameters:
+ *       - in: path
+ *         name: quizId
+ *         required: true
+ *         description: ID of the quiz
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: A quiz with capital questions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/CapitalQuestion'
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  *         content:

@@ -76,3 +76,30 @@ export const deleteQuiz = async (req: Request, res: Response) => {
 		return res.status(500).json({ error: error.message });
 	}
 };
+
+//------------------------------------------------------------
+
+export const getCapitalQuestions = async (req: Request, res: Response) => {
+	try {
+		const { quizId } = req.params;
+
+		const quiz = await Quiz.findById(quizId)
+			.populate({
+				path: 'questions',
+				select: '-__v',
+				match: {
+					keywords: { $in: ['capital'] },
+				},
+			})
+			.select('-__v')
+			.exec();
+
+		if (!quiz) {
+			return res.status(404).json({ message: 'Quiz not found' });
+		}
+
+		return res.status(200).json(quiz);
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
+	}
+};
