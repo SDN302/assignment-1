@@ -10,6 +10,7 @@
 ## Documents
 
 - Document: [Assignment 1](docs/Assignment%201.docx)
+- Database: [Database](data/README.md)
 
 ## Build
 
