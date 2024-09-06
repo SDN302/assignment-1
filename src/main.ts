@@ -1,10 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import { server } from './config/config';
+import { DEVELOPMENT, server } from './config/config';
 import connectDb from './config/db';
 import question from './routes/question.route';
 import quiz from './routes/quiz.route';
 import morgan from 'morgan';
+import { open } from 'openurl';
 import { setupSwagger } from './swagger/swagger';
 
 // CORS Middleware
@@ -37,4 +38,13 @@ app.listen(server.port, async () => {
 	await connectDb();
 
 	console.info(`Listening on PORT ${server.port}`);
+
+	if (DEVELOPMENT) {
+		console.info(
+			`Swagger UI available at http://${server.host}:${server.port}/api-docs`,
+		);
+
+		// Open API documents
+		open(`http://${server.host}:${server.port}/api-docs`);
+	}
 });
