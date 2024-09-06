@@ -131,6 +131,22 @@ router.get('/:quizId', getQuizById);
  *         required: true
  *         schema:
  *           $ref: '#/definitions/CreateQuizQuery'
+ *     responses:
+ *       200:
+ *         description: A quiz
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Quiz'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.post('/', createQuiz);
 
@@ -155,6 +171,22 @@ router.post('/', createQuiz);
  *         required: true
  *         schema:
  *           $ref: '#/definitions/UpdateQuizQuery'
+ *     responses:
+ *       200:
+ *         description: A quiz
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Quiz'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.put('/:quizId', updateQuiz);
 
@@ -173,6 +205,18 @@ router.put('/:quizId', updateQuiz);
  *         description: ID of the quiz
  *         schema:
  *           type: string
+ *     responses:
+ *       200:
+ *         description: Delete a quiz successfully
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.delete('/:quizId', deleteQuiz);
 

@@ -137,6 +137,22 @@ router.get('/:questionId', getQuestionById);
  *         required: true
  *         schema:
  *           $ref: '#/definitions/CreateQuestionQuery'
+ *     responses:
+ *       201:
+ *         description: Create a question successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Question'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.post('/', createQuestion);
 
@@ -161,6 +177,22 @@ router.post('/', createQuestion);
  *         required: true
  *         schema:
  *           $ref: '#/definitions/UpdateQuestionQuery'
+ *     responses:
+ *       200:
+ *         description: Update a question successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Question'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.put('/:questionId', updateQuestion);
 
@@ -179,6 +211,18 @@ router.put('/:questionId', updateQuestion);
  *         description: ID of the question
  *         schema:
  *           type: string
+ *     responses:
+ *       200:
+ *         description: Update a question successfully
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.delete('/:questionId', deleteQuestion);
 
