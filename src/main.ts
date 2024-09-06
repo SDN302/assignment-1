@@ -4,6 +4,7 @@ import { server } from './config/config';
 import connectDb from './config/db';
 import question from './routes/question.route';
 import quiz from './routes/quiz.route';
+import morgan from 'morgan';
 
 // CORS Middleware
 const corsOptions = {
@@ -21,6 +22,7 @@ const app = express();
 // Middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(morgan('dev'));
 
 // Routes
 app.use('/questions', question);

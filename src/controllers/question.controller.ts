@@ -3,8 +3,6 @@ import { Request, Response } from 'express';
 
 export const getAllQuestions = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const questions = await Question.find();
 
 		return res.status(200).json(questions);
@@ -19,8 +17,6 @@ export const getAllQuestions = async (req: Request, res: Response) => {
 
 export const getQuestionById = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { questionId } = req.params;
 
 		const question = await Question.findById(questionId);
@@ -35,8 +31,6 @@ export const getQuestionById = async (req: Request, res: Response) => {
 
 export const createQuestion = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const question = new Question(req.body);
 
 		const newQuestion = await question.save();
@@ -51,8 +45,6 @@ export const createQuestion = async (req: Request, res: Response) => {
 
 export const updateQuestion = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { questionId } = req.params;
 		const updatedQuestion = await Question.findByIdAndUpdate(
 			questionId,
@@ -74,8 +66,6 @@ export const updateQuestion = async (req: Request, res: Response) => {
 
 export const deleteQuestion = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { questionId } = req.params;
 		const deletedQuestion = await Question.findByIdAndDelete(questionId);
 

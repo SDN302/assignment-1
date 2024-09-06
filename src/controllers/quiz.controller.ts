@@ -3,8 +3,6 @@ import { Request, Response } from 'express';
 
 export const getAllQuizzes = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const quizzes = await Quiz.find();
 
 		return res.status(200).json(quizzes);
@@ -19,8 +17,6 @@ export const getAllQuizzes = async (req: Request, res: Response) => {
 
 export const getQuizById = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { quizId } = req.params;
 
 		const quiz = await Quiz.findById(quizId);
@@ -35,8 +31,6 @@ export const getQuizById = async (req: Request, res: Response) => {
 
 export const createQuiz = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const quiz = new Quiz(req.body);
 
 		const newQuiz = await quiz.save();
@@ -51,8 +45,6 @@ export const createQuiz = async (req: Request, res: Response) => {
 
 export const updateQuiz = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { quizId } = req.params;
 		const updatedQuiz = await Quiz.findByIdAndUpdate(quizId, req.body, {
 			new: true,
@@ -72,8 +64,6 @@ export const updateQuiz = async (req: Request, res: Response) => {
 
 export const deleteQuiz = async (req: Request, res: Response) => {
 	try {
-		console.info(`${req.method} ${req.baseUrl}`);
-
 		const { quizId } = req.params;
 		const deletedQuiz = await Quiz.findByIdAndDelete(quizId);
 
