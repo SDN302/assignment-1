@@ -9,13 +9,177 @@ import {
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * definitions:
+ *   Question:
+ *     type: object
+ *     properties:
+ *       _id:
+ *         type: string
+ *       text:
+ *         type: string
+ *       options:
+ *         type: array
+ *         items:
+ *           type: string
+ *       correctAnswerIndex:
+ *         type: number
+ */
+
+/**
+ * @swagger
+ * definitions:
+ *   CreateQuestionQuery:
+ *     type: object
+ *     properties:
+ *       text:
+ *         type: string
+ *       options:
+ *         type: array
+ *         items:
+ *           type: string
+ *       correctAnswerIndex:
+ *         type: number
+ */
+
+/**
+ * @swagger
+ * definitions:
+ *   UpdateQuestionQuery:
+ *     type: object
+ *     properties:
+ *       text:
+ *         type: string
+ *       options:
+ *         type: array
+ *         items:
+ *           type: string
+ *       correctAnswerIndex:
+ *         type: number
+ */
+
+/**
+ * @swagger
+ * /questions:
+ *   get:
+ *     summary: Get all questions
+ *     description: Get all questions
+ *     tags:
+ *       - Questions
+ *     responses:
+ *       200:
+ *         description: Get all questions successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/definitions/Question'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ */
 router.get('/', getAllQuestions);
+
+/**
+ * @swagger
+ * /questions/{questionId}:
+ *   get:
+ *     summary: Get a question by ID
+ *     description: Get a question by ID
+ *     tags:
+ *       - Questions
+ *     parameters:
+ *       - in: path
+ *         name: questionId
+ *         required: true
+ *         description: ID of the question
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Get a question by ID successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Question'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ */
 router.get('/:questionId', getQuestionById);
 
+/**
+ * @swagger
+ * /questions:
+ *   post:
+ *     summary: Create a question
+ *     description: Create a question
+ *     tags:
+ *       - Questions
+ *     parameters:
+ *       - in: body
+ *         name: question
+ *         description: The question to create
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/CreateQuestionQuery'
+ */
 router.post('/', createQuestion);
 
+/**
+ * @swagger
+ * /questions/{questionId}:
+ *   put:
+ *     summary: Update a question
+ *     description: Update a question
+ *     tags:
+ *       - Questions
+ *     parameters:
+ *       - in: path
+ *         name: questionId
+ *         required: true
+ *         description: ID of the question
+ *         schema:
+ *           type: string
+ *       - in: body
+ *         name: question
+ *         description: The question to update
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/UpdateQuestionQuery'
+ */
 router.put('/:questionId', updateQuestion);
 
+/**
+ * @swagger
+ * /questions/{questionId}:
+ *   delete:
+ *     summary: Delete a question
+ *     description: Delete a question
+ *     tags:
+ *       - Questions
+ *     parameters:
+ *       - in: path
+ *         name: questionId
+ *         required: true
+ *         description: ID of the question
+ *         schema:
+ *           type: string
+ */
 router.delete('/:questionId', deleteQuestion);
 
 export default router;
