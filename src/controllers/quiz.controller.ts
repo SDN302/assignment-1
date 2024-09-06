@@ -128,3 +128,30 @@ export const createOneQuestionForQuiz = async (req: Request, res: Response) => {
 		return res.status(500).json({ error: error.message });
 	}
 };
+
+//------------------------------------------------------------
+
+export const createManyQuestionsForQuiz = async (
+	req: Request,
+	res: Response,
+) => {
+	try {
+		const { quizId } = req.params;
+
+		const quiz = await Quiz.findById(quizId);
+
+		if (!quiz) {
+			return res.status(404).json({ message: 'Quiz not found' });
+		}
+
+		const questions = req.body.map((question: any) => new Question(question));
+		const newQuestions = await Question.insertMany(questions);
+
+		quiz.questions.push(...newQuestions.map((question: any) => question._id));
+		await quiz.save();
+
+		return res.status(201).json(newQuestions);
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
+	}
+};

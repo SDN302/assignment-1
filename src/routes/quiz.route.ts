@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+	createManyQuestionsForQuiz,
 	createOneQuestionForQuiz,
 	createQuiz,
 	deleteQuiz,
@@ -366,5 +367,59 @@ router.get('/:quizId/populate', getCapitalQuestions);
  *                   type: string
  */
 router.post('/:quizId/question', createOneQuestionForQuiz);
+
+/**
+ * @swagger
+ * /quizzes/{quizId}/questions:
+ *   post:
+ *     summary: Create many questions for a quiz
+ *     description: Create many questions for a quiz
+ *     tags:
+ *       - Quizzes
+ *     parameters:
+ *       - in: path
+ *         name: quizId
+ *         required: true
+ *         description: ID of the quiz
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       description: The question to create
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               $ref: '#/definitions/CreateQuestionQuery'
+ *     responses:
+ *       201:
+ *         description: Create a question successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/definitions/Question'
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+router.post('/:quizId/questions', createManyQuestionsForQuiz);
 
 export default router;
