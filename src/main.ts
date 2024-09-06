@@ -5,6 +5,7 @@ import connectDb from './config/db';
 import question from './routes/question.route';
 import quiz from './routes/quiz.route';
 import morgan from 'morgan';
+import { setupSwagger } from './swagger/swagger';
 
 // CORS Middleware
 const corsOptions = {
@@ -27,6 +28,9 @@ app.use(morgan('dev'));
 // Routes
 app.use('/questions', question);
 app.use('/quizzes', quiz);
+
+// Swagger
+setupSwagger(app);
 
 app.listen(server.port, async () => {
 	// Connect to MongoDB
