@@ -23,6 +23,10 @@ const router = express.Router();
  *         type: array
  *         items:
  *           type: string
+ *       keywords:
+ *         type: array
+ *         items:
+ *           type: string
  *       correctAnswerIndex:
  *         type: number
  */
@@ -39,6 +43,10 @@ const router = express.Router();
  *         type: array
  *         items:
  *           type: string
+ *       keywords:
+ *         type: array
+ *         items:
+ *           type: string
  *       correctAnswerIndex:
  *         type: number
  */
@@ -52,6 +60,10 @@ const router = express.Router();
  *       text:
  *         type: string
  *       options:
+ *         type: array
+ *         items:
+ *           type: string
+ *       keywords:
  *         type: array
  *         items:
  *           type: string
