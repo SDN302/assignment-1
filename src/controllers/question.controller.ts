@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export const getAllQuestions = async (req: Request, res: Response) => {
 	try {
-		const questions = await Question.find();
+		const questions = await Question.find().select('-__v');
 
 		return res.status(200).json(questions);
 	} catch (error: any) {
@@ -19,7 +19,7 @@ export const getQuestionById = async (req: Request, res: Response) => {
 	try {
 		const { questionId } = req.params;
 
-		const question = await Question.findById(questionId);
+		const question = await Question.findById(questionId).select('-__v');
 
 		if (!question) {
 			return res.status(404).json({ message: 'Question not found' });
@@ -54,7 +54,7 @@ export const updateQuestion = async (req: Request, res: Response) => {
 			questionId,
 			req.body,
 			{ new: true },
-		);
+		).select('-__v');
 
 		if (!updatedQuestion) {
 			return res.status(404).json({ message: 'Question not found' });
@@ -71,7 +71,9 @@ export const updateQuestion = async (req: Request, res: Response) => {
 export const deleteQuestion = async (req: Request, res: Response) => {
 	try {
 		const { questionId } = req.params;
-		const deletedQuestion = await Question.findByIdAndDelete(questionId);
+		const deletedQuestion = await Question.findByIdAndDelete(questionId).select(
+			'-__v',
+		);
 
 		if (!deletedQuestion) {
 			return res.status(404).json({ message: 'Question not found' });
