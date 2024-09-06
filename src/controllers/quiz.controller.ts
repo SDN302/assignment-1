@@ -1,3 +1,4 @@
+import { Question } from '../models/question.model';
 import { Quiz } from '../models/quiz.model';
 import { Request, Response } from 'express';
 
@@ -99,6 +100,30 @@ export const getCapitalQuestions = async (req: Request, res: Response) => {
 		}
 
 		return res.status(200).json(quiz);
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
+//------------------------------------------------------------
+
+export const createOneQuestionForQuiz = async (req: Request, res: Response) => {
+	try {
+		const { quizId } = req.params;
+
+		const quiz = await Quiz.findById(quizId);
+
+		if (!quiz) {
+			return res.status(404).json({ message: 'Quiz not found' });
+		}
+
+		const question = new Question(req.body);
+		const newQuestion = await question.save();
+
+		quiz.questions.push(newQuestion._id);
+		await quiz.save();
+
+		return res.status(201).json(newQuestion);
 	} catch (error: any) {
 		return res.status(500).json({ error: error.message });
 	}

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+	createOneQuestionForQuiz,
 	createQuiz,
 	deleteQuiz,
 	getAllQuizzes,
@@ -75,20 +76,7 @@ const router = express.Router();
  *       questions:
  *         type: array
  *         items:
- *           type: object
- *           properties:
- *             _id:
- *               type: string
- *             title:
- *               type: string
- *             description:
- *               type: string
- *             keywords:
- *               type: array
- *               items:
- *                 type: string
- *             correctAnswerIndex:
- *               type: number
+ *           $ref: '#/definitions/Question'
  */
 
 /**
@@ -328,5 +316,55 @@ router.delete('/:quizId', deleteQuiz);
  *                   type: string
  */
 router.get('/:quizId/populate', getCapitalQuestions);
+
+/**
+ * @swagger
+ * /quizzes/{quizId}/question:
+ *   post:
+ *     summary: Create a new question for a quiz
+ *     description: Create a new question for a quiz
+ *     tags:
+ *       - Quizzes
+ *     parameters:
+ *       - in: path
+ *         name: quizId
+ *         required: true
+ *         description: ID of the quiz
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       description: The question to create
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/CreateQuestionQuery'
+ *     responses:
+ *       201:
+ *         description: Create a question successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/definitions/Question'
+ *       404:
+ *         description: Quiz not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
+router.post('/:quizId/question', createOneQuestionForQuiz);
 
 export default router;
