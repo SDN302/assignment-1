@@ -142,13 +142,13 @@ router.get('/:questionId', getQuestionById);
  *     description: Create a question
  *     tags:
  *       - Questions
- *     parameters:
- *       - in: body
- *         name: question
- *         description: The question to create
- *         required: true
- *         schema:
- *           $ref: '#/definitions/CreateQuestionQuery'
+ *     requestBody:
+ *       description: The question to create
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/CreateQuestionQuery'
  *     responses:
  *       201:
  *         description: Create a question successfully
@@ -183,12 +183,13 @@ router.post('/', createQuestion);
  *         description: ID of the question
  *         schema:
  *           type: string
- *       - in: body
- *         name: question
- *         description: The question to update
- *         required: true
- *         schema:
- *           $ref: '#/definitions/UpdateQuestionQuery'
+ *     requestBody:
+ *       description: The question to update
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/UpdateQuestionQuery'
  *     responses:
  *       200:
  *         description: Update a question successfully

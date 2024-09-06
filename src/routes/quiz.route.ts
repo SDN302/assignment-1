@@ -60,7 +60,7 @@ const router = express.Router();
  *     summary: Get all quizzes
  *     description: Retrieve a list of all quizzes
  *     tags:
- *       - Quiz
+ *       - Quizzes
  *     responses:
  *       200:
  *         description: A list of quizzes
@@ -89,7 +89,7 @@ router.get('/', getAllQuizzes);
  *     summary: Get a quiz by ID
  *     description: Retrieve a quiz by ID
  *     tags:
- *       - Quiz
+ *       - Quizzes
  *     parameters:
  *       - in: path
  *         name: quizId
@@ -123,14 +123,14 @@ router.get('/:quizId', getQuizById);
  *     summary: Create a new quiz
  *     description: Create a new quiz
  *     tags:
- *       - Quiz
- *     parameters:
- *       - in: body
- *         name: quiz
- *         description: The quiz to create
- *         required: true
- *         schema:
- *           $ref: '#/definitions/CreateQuizQuery'
+ *       - Quizzes
+ *     requestBody:
+ *       description: The quiz to create
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/CreateQuizQuery'
  *     responses:
  *       200:
  *         description: A quiz
@@ -157,7 +157,7 @@ router.post('/', createQuiz);
  *     summary: Update a quiz by ID
  *     description: Update a quiz by ID
  *     tags:
- *       - Quiz
+ *       - Quizzes
  *     parameters:
  *       - in: path
  *         name: quizId
@@ -165,12 +165,13 @@ router.post('/', createQuiz);
  *         description: ID of the quiz
  *         schema:
  *           type: string
- *       - in: body
- *         name: quiz
- *         description: The quiz to update
- *         required: true
- *         schema:
- *           $ref: '#/definitions/UpdateQuizQuery'
+ *     requestBody:
+ *       description: The quiz to update
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/UpdateQuizQuery'
  *     responses:
  *       200:
  *         description: A quiz
@@ -197,7 +198,7 @@ router.put('/:quizId', updateQuiz);
  *     summary: Delete a quiz by ID
  *     description: Delete a quiz by ID
  *     tags:
- *       - Quiz
+ *       - Quizzes
  *     parameters:
  *       - in: path
  *         name: quizId
