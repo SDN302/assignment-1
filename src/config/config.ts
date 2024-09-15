@@ -1,6 +1,6 @@
-import dotnev from 'dotenv';
+import dotenv from 'dotenv';
 
-dotnev.config();
+dotenv.config();
 
 export const DEVELOPMENT: boolean = process.env['APP_ENV'] == 'development';
 
