@@ -5,7 +5,6 @@ import connectDb from './config/db';
 import question from './routes/question.route';
 import quiz from './routes/quiz.route';
 import morgan from 'morgan';
-import { open } from 'openurl';
 import { setupSwagger } from './swagger/swagger';
 
 // CORS Middleware
@@ -43,8 +42,5 @@ app.listen(server.port, async () => {
 		console.info(
 			`Swagger UI available at http://${server.host}:${server.port}/api-docs`,
 		);
-
-		// Open API documents
-		open(`http://${server.host}:${server.port}/api-docs`);
 	}
 });
